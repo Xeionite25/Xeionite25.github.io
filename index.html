@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="test.css">
+    <script src="test.js"></script>
+</head>
+<title>Sequences</title>
+
+<body>
+    <div class="header-container">
+        <div class="header-des">
+            <text>Sequences</text>
+        </div>
+    </div>
+    <div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <span class="span1" id="fibo">Fibonacci</span>
+            <div class="quote">
+                <form class="form-des">
+                    <div class="size">
+                        <p class="p-des1">Fibonacci</p>
+                    </div>
+                    <br>
+                    <div class="input-des">
+                        <input class="input-color" type="text" id="ficci" placeholder="nth Term">
+                    </div>
+                    <br>
+                    <div class="btn-des">
+                        <button class="formbutton1" type="button" id="fsubmit" onclick="fcompute()"> Compute </button>
+                    </div>
+                    <br>
+                </form>
+                <p class="result" id="fresult"></p>
+            </div>
+        </div>
+        <div class="content">
+            <span class="span2" id="fibo">Lucas</span>
+            <div class="quote">
+                <form>
+                    <div class="size">
+                        <p class="p-des2">Lucas</p>
+                    </div>
+                    <br>
+                    <div class="input-des">
+                        <input class="input-color" type="text" id="L" placeholder="nth Term">
+                    </div>
+                    <br>
+                    <div class="btn-des">
+                        <button class="formbutton2" type="button" id="lsubmit" onclick="lcompute()"> Compute </button>
+                    </div>
+                    <br>
+                </form>
+                <p class="result" id="lresult"></p>
+            </div>
+        </div>
+        <div class="content">
+            <span class="span3" id="fibo">Tribonacci</span>
+            <div class="quote">
+                <form>
+                    <div class="size">
+                        <p class="p-des3">Tribonacci</p>
+                    </div>
+                    <br>
+                    <div class="input-des">
+                        <input class="input-color" type="text" id="tricci" placeholder="nth Term">
+                    </div>
+                    <br>
+                    <div class="btn-des">
+                        <button class="formbutton3" type="button" id="tsubmit" onclick="tcompute()"> Compute </button>
+                    </div>
+                    <br>
+                </form>
+                <p class="result" id="tresult"></p>
+            </div>
+        </div>
+        <div class="content">
+            <span class="span4" id="fibo">Collatz</span>
+            <div class="quote">
+                <form>
+                    <div class="size">
+                        <p class="p-des4">Collatz</p>
+                    </div>
+                    <br>
+                    <div class="input-des">
+                        <input class="input-color" type="text" id="catz" placeholder="nth Term">
+                    </div>
+                    <br>
+                    <div class="btn-des">
+                        <button class="formbutton4" type="button" id="csubmit" onclick="ccompute()"> Compute </button>
+                    </div>
+                </form>
+                <p class="result" id="cresult"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fcompute() {
+            let fval = document.getElementById("ficci").value;
+            let num1 = 0, num2 = 1, fibonacci;
+            if (fval == 1 || fval == 0) {
+                fibonacci = 0;
+            }
+            else if (fval == 2) {
+                fibonacci = 1;
+            }
+            else {
+                for (let i = 3; i <= fval; i++) {
+                    fibonacci = num1 + num2;
+                    num1 = num2;
+                    num2 = fibonacci;
+                }
+            }
+            document.getElementById("fresult").innerHTML = "The " + fval + "th Term in the Fibonacci Sequence is " + fibonacci;
+        }
+        function lcompute() {
+            let lval = document.getElementById("L").value;
+            let num1 = 2, num2 = 1, lucas;
+            if (lval == 0) {
+                lucas = 0;
+            }
+            if (lval == 1) {
+                lucas = 2;
+            }
+            else if (lval == 2) {
+                lucas = 1;
+            }
+            else {
+                for (let i = 3; i <= lval; i++) {
+                    lucas = num1 + num2;
+                    num1 = num2;
+                    num2 = lucas;
+                }
+            }
+            document.getElementById("lresult").innerHTML = "The " + lval + "th Term in the Lucas Sequence is " + lucas;
+        }
+        function tcompute() {
+            let tval = document.getElementById("tricci").value;
+            let num1 = 0, num2 = 0, num3 = 1, tribonacci;
+            if (tval == 0 || tval == 1 || tval == 2) {
+                tribonacci = 0;
+            }
+            else if (tval == 3) {
+                tribonacci = 1;
+            }
+            else {
+                for (let i = 4; i <= tval; i++) {
+                    tribonacci = num1 + num2 + num3;
+                    num1 = num2;
+                    num2 = num3;
+                    num3 = tribonacci;
+                }
+            }
+            document.getElementById("tresult").innerHTML = "The " + tval + "th Term in the Tribonacci Sequence is " + tribonacci;
+        }
+        function ccompute() {
+            let cval = document.getElementById("catz").value;
+            let collatzString = " C0 = " + cval + "\n ";
+            let counter = 1;
+
+            while (cval != 1) {
+                if (cval % 2 == 0) {
+                    cval = cval / 2;
+                }
+                else if (cval % 2 == 1) {
+                    cval = (cval * 3) + 1;
+                }
+                collatzString = collatzString + "C" + counter + " = " + cval + "\n ";
+                counter++;
+            }
+            window.alert(collatzString);
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const tribonacciElement = document.getElementById('fibo');
+            tribonacciElement.addEventListener('mouseover', function () {
+                tribonacciElement.style.display = 'none';
+            });
+            tribonacciElement.addEventListener('mouseout', function () {
+                tribonacciElement.style.display = 'block';
+            });
+        })
+
+    </script>
+
+</body>
+
+</html>
